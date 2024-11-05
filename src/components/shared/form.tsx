@@ -44,11 +44,11 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" onClick={onClose}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black" onClick={onClose}>
             <div className="bg-white p-6 rounded-xl shadow-lg shadow-black border border-black w-full max-w-md mx-auto z-1000" onClick={(e) => e.stopPropagation()}>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                        <h1 className={'text-2xl font-thin text-left ml-2'}> Log in </h1>
+                        <h1 className={'text-2xl font-thin text-left ml-2 text-black'}> Log in </h1>
                         <FormField
                             control={form.control}
                             name="username"

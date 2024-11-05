@@ -22,7 +22,7 @@ export const Header: React.FC<Props> = ({className}) =>{
 
 
                 {/*инпут*/}
-                <div className={'mx-auto flex-1'}>
+                <div className={' mx-auto flex-1 -ml-16'}>
                     <SearchInput className={'w-[40%]'}/>
                 </div>
 

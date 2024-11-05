@@ -46,6 +46,15 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'defaultFont';
+    src: url('./assets/fonts/TTTravels-Light.ttf');
+    font-weight: 200;
+    font-style: normal;
+}
+
+
+
 
 .container {
     display: flex;
@@ -56,6 +65,8 @@
 
 html, body {
     background-color: #2d2d2d;
+    color: white;
+    font-family: 'defaultFont', 'sans-serif';
 }
 
 
@@ -1081,3 +1092,5 @@ video {
     padding: 0;
     text-align: center;
 }
+
+
