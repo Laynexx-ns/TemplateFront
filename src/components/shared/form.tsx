@@ -45,10 +45,10 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black" onClick={onClose}>
-            <div className="bg-white p-6 rounded-xl shadow-lg shadow-black border border-black w-full max-w-md mx-auto z-1000" onClick={(e) => e.stopPropagation()}>
+            <div className=" p-6 rounded-xl shadow-lg shadow-black border border-black w-full bg-white max-w-md mx-auto z-1000" onClick={(e) => e.stopPropagation()}>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                        <h1 className={'text-2xl font-thin text-left ml-2 text-black'}> Log in </h1>
+                        <h1 className={'text-2xl font-thin text-left ml-2 text-black  '}> Log in </h1>
                         <FormField
                             control={form.control}
                             name="username"
@@ -56,7 +56,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                                 <FormItem>
                                     <FormLabel>Username</FormLabel>
                                     <FormControl>
-                                        <Input className={'rounded-xl font-light'} placeholder="накалякай нейм" {...field} />
+                                        <Input className={'rounded-xl font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
                                     </FormControl>
 
                                     <FormDescription>
@@ -73,7 +73,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input className={'rounded-xl font-light'} placeholder="example@example.com" {...field} />
+                                        <Input className={'rounded-xl font-light bg-gray-50'} placeholder="example@example.com" {...field} />
                                     </FormControl>
 
                                     <FormDescription>
@@ -84,7 +84,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                             )}
                         />
 
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit" className={'hover:shadow-black/50 shadow-md'}>Submit</Button>
                     </form>
                 </Form>
             </div>
