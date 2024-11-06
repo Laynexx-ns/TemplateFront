@@ -10,7 +10,7 @@ interface Props{
 
 export const LoginButton : React.FC<Props> = ({className}) => {
     const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-    const navigate = useNavigate();
+
 
     const openDialog = () => setIsDialogOpen(true);
     const closeDialog = () => setIsDialogOpen(false);

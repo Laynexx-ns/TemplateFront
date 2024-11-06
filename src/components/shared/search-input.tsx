@@ -31,7 +31,6 @@ export const SearchInput: React.FC<Props> = ({className}) =>{
                                type={'text'}
                                placeholder={'Найти...'}
                                onFocus={()=> setFocuded(true)}
-
                         />
                     </div>
                 </>
