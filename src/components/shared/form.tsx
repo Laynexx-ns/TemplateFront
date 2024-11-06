@@ -1,6 +1,7 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
+import
+{ zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui";
@@ -14,7 +15,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {useContext} from "react";
+import {useNavigate} from 'react-router-dom';
 
 const formSchema = z.object({
     username: z.string().min(3, {
@@ -31,6 +32,9 @@ interface ProfileFormProps {
 
 export function ProfileForm({ onClose }: ProfileFormProps) {
     // 1. Define your form.
+
+    const navigate = useNavigate();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -42,8 +46,8 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
         onClose();
+        navigate('/src/account-page')
     }
 
     return (
@@ -87,7 +91,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                             )}
                         />
 
-                        <Button type="submit" className={'hover:shadow-black/50 shadow-md'}>Submit</Button>
+                        <Button type="submit"  className={'hover:shadow-black/50 shadow-md'}>Submit</Button>
                     </form>
                 </Form>
             </div>

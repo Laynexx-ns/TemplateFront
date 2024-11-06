@@ -11,7 +11,7 @@ function App() {
             <nav>
                 <Link to={'main-page'}> Главная </Link>
                 <Link to={'./src/about-us-page'}> about us </Link>
-                <Link to={'/account-page'}> account </Link>
+                <Link to={'src/account-page'}> account </Link>
             </nav>
             <Routes>
                 <Route path={'main-page'} element={<MainPage/>}/>

@@ -17,7 +17,6 @@ export const LoginButton : React.FC<Props> = ({className}) => {
 
     const onClose = ()=>{
         closeDialog();
-        navigate('/src/account-page')
     }
 
     return(

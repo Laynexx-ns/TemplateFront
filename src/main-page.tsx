@@ -21,7 +21,7 @@ function MainPage() {
 
                     {/*тут условные карточки с картинками*/}
                     <div className={'ml-[350px] flex flex-1 '}>
-                        <div className={'grid grid-cols-4 gap-8'}>
+                        <div className={'grid grid-cols-4 gap-12'}>
                             <Card name={'qwe'}
                                   imageUrl={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZOmEhZwJz9BaRWEtKA95b8RGXKtI3QODr-w&s'}/>
                             <Card name={'qwe'}
