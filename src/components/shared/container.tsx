@@ -9,7 +9,7 @@ interface Props{
 
 export const Container: React.FC<PropsWithChildren<Props>> = ({children, className}) => {
     return (
-        <div className={cn('flex items-center w-full', className)}>
+        <div className={cn('flex items-center ', className)}>
             {children}
         </div>
     )

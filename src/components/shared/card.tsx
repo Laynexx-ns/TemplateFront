@@ -6,6 +6,7 @@ import {Plus} from "lucide-react";
 interface Props{
 
     name: string;
+    // потом добавить описание как обязательный параметр
     imageUrl?: string;
     className?: string;
 }
@@ -15,11 +16,7 @@ export const Card: React.FC<Props> = ({className, name, imageUrl}) => {
         <div className={className}>
 
                 <div className={'flex justify-center p-6 bg-secondary rounded-lg h-[260px]'}>
-                    <img className={'w-[215px] h-[215px]'} src={imageUrl} alt={name}/>
-                </div>
-
-                <div className={'sticky flex-auto '}>
-
+                    <img className={'w-[200px] h-[200px]'} src={imageUrl} alt={name}/>
                 </div>
 
                 <Title text={name} size={'sm'} className={'mb-1 mt-3 font-bold'}/>
@@ -31,7 +28,7 @@ export const Card: React.FC<Props> = ({className, name, imageUrl}) => {
                 <div className={'flex items-center justify-center mt-4'}>
                     <Button variant={'secondary'} className={'text-base font-bold'}>
                         <Plus className={'mr-1'} size={20}/>
-                        Добавить
+                        Нажать на кнопочку
                     </Button>
                 </div>
 

@@ -1,28 +1,24 @@
-import {Card, Container, Header, ProfileForm, SideBar} from "@/components/shared";
-import {Button} from "@/components/ui/button";
-import {Input} from "postcss";
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+
+import MainPage from './main-page';
+import AccountPage from "@/pages/account-page";
+import AboutUsPage from "@/pages/about-us-page";
 
 function App() {
     return (
-        <div className=" px-4">
-            <header className={' opacity-1'}>
-                <Header/>
-            </header>
-            <Container className={'mt-10'}>
-                {/*sidebar*/}
-                <div className={'relative ml-20 w-[250px]'}>
-                    <SideBar/>
-                </div>
-
-
-                    <div className={'mx-auto flex '}>
-                        <div className={'justify-center  gap-8'}>
-                            <Card name={'qwe'} imageUrl={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZOmEhZwJz9BaRWEtKA95b8RGXKtI3QODr-w&s'}/>
-                        </div>
-                    </div>
-
-            </Container>
-        </div>
+        <Router>
+            <nav>
+                <Link to={'main-page'}> Главная </Link>
+                <Link to={'./src/about-us-page'}> about us </Link>
+                <Link to={'/account-page'}> account </Link>
+            </nav>
+            <Routes>
+                <Route path={'main-page'} element={<MainPage/>}/>
+                <Route path={'src/about-us-page'} element={<AboutUsPage/>}/>
+                <Route path={'src/account-page'} element={<AccountPage/>}/>
+            </Routes>
+        </Router>
     )
 }
 
