@@ -7,6 +7,7 @@
 	4.  customized shcn button, switches, input
 	6.  flexible form + dialog
 	7.  card for products and other objects
+ 	8.  floating sidebar
 
 ### To run this project:
 
