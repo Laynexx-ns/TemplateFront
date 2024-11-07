@@ -1,5 +1,5 @@
 import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
+import {CalendarCheck2, GalleryVerticalEnd, LogIn} from "lucide-react"
 
 import {
     Sidebar,
@@ -13,158 +13,52 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import {Button} from "@/components/ui";
+import {cn} from "@/lib/utils";
 
 // This is sample data.
 const data = {
     navMain: [
         {
+            title: "Back to home",
+            url: "/",
+            icon: null,
+        },
+        {
             title: "Getting Started",
             url: "#",
+            icon: null,
             items: [
                 {
                     title: "Installation",
                     url: "#",
+                    icon: <CalendarCheck2 size={'18'} />
                 },
                 {
                     title: "Project Structure",
                     url: "#",
+                    icon: <GalleryVerticalEnd size={'18'}/>,
                 },
             ],
         },
         {
-            title: "Building Your Application",
-            url: "#",
-            items: [
-                {
-                    title: "Routing",
-                    url: "#",
-                },
-                {
-                    title: "Data Fetching",
-                    url: "#",
-                    isActive: true,
-                },
-                {
-                    title: "Rendering",
-                    url: "#",
-                },
-                {
-                    title: "Caching",
-                    url: "#",
-                },
-                {
-                    title: "Styling",
-                    url: "#",
-                },
-                {
-                    title: "Optimizing",
-                    url: "#",
-                },
-                {
-                    title: "Configuring",
-                    url: "#",
-                },
-                {
-                    title: "Testing",
-                    url: "#",
-                },
-                {
-                    title: "Authentication",
-                    url: "#",
-                },
-                {
-                    title: "Deploying",
-                    url: "#",
-                },
-                {
-                    title: "Upgrading",
-                    url: "#",
-                },
-                {
-                    title: "Examples",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "API Reference",
-            url: "#",
-            items: [
-                {
-                    title: "Components",
-                    url: "#",
-                },
-                {
-                    title: "File Conventions",
-                    url: "#",
-                },
-                {
-                    title: "Functions",
-                    url: "#",
-                },
-                {
-                    title: "next.config.js Options",
-                    url: "#",
-                },
-                {
-                    title: "CLI",
-                    url: "#",
-                },
-                {
-                    title: "Edge Runtime",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Architecture",
-            url: "#",
-            items: [
-                {
-                    title: "Accessibility",
-                    url: "#",
-                },
-                {
-                    title: "Fast Refresh",
-                    url: "#",
-                },
-                {
-                    title: "Next.js Compiler",
-                    url: "#",
-                },
-                {
-                    title: "Supported Browsers",
-                    url: "#",
-                },
-                {
-                    title: "Turbopack",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Community",
-            url: "#",
-            items: [
-                {
-                    title: "Contribution Guide",
-                    url: "#",
-                },
-            ],
-        },
+            title: "Docs",
+            url: "/",
+            icon: null,
+        }
     ],
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
-        <Sidebar variant="floating" {...props}>
+        <Sidebar variant={'floating'} className={'text-white bg-black'} {...props}>
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton size="lg" asChild>
+                        <SidebarMenuButton size='lg' className={''} asChild>
                             <a href="#">
                                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-black text-sidebar-primary-foreground">
-                                    <GalleryVerticalEnd className="size-4" />
+                                    <GalleryVerticalEnd className="size-5" />
                                 </div>
                                 <div className="flex flex-col gap-0.5 leading-none">
                                     <span className="font-semibold">Documentation</span>
@@ -181,7 +75,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         {data.navMain.map((item) => (
                             <SidebarMenuItem key={item.title}>
                                 <SidebarMenuButton asChild>
-                                    <a href={item.url} className="font-medium">
+                                    <a href={item.url} className={''}>
+                                        {item.icon}
                                         {item.title}
                                     </a>
                                 </SidebarMenuButton>
@@ -189,8 +84,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                     <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
                                         {item.items.map((item) => (
                                             <SidebarMenuSubItem key={item.title}>
-                                                <SidebarMenuSubButton asChild isActive={item.isActive}>
-                                                    <a href={item.url}>{item.title}</a>
+                                                <SidebarMenuSubButton asChild>
+                                                    <Button variant={'link'} className={'text-left justify-start text-white'}> <span className={'text-gray-100/50'}>{item.icon}</span> {item.title} </Button>
                                                 </SidebarMenuSubButton>
                                             </SidebarMenuSubItem>
                                         ))}

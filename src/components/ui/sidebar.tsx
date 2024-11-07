@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { ViewVerticalIcon } from "@radix-ui/react-icons"
+import {ArrowLeft, ArrowRight, ChevronLeft, ChevronRight} from "lucide-react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -43,6 +44,7 @@ function useSidebar() {
 
   return context
 }
+
 
 const SidebarProvider = React.forwardRef<
   HTMLDivElement,
@@ -259,8 +261,11 @@ Sidebar.displayName = "Sidebar"
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
+
 >(({ className, onClick, ...props }, ref) => {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar } = useSidebar();
+  const [clicked, setClicked] = React.useState(false);
+
 
   return (
     <Button
@@ -271,11 +276,18 @@ const SidebarTrigger = React.forwardRef<
       className={cn("h-7 w-7", className)}
       onClick={(event) => {
         onClick?.(event)
+          setClicked(!clicked)
         toggleSidebar()
       }}
       {...props}
     >
-      <ViewVerticalIcon />
+        {clicked &&
+            <ChevronRight strokeWidth={1.25}/>
+        }
+        {!clicked &&
+            <ChevronLeft strokeWidth={1.25} />
+        }
+
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )
