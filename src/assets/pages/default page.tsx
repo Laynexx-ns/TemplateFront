@@ -1,7 +1,6 @@
 import React from 'react';
 // @ts-ignore
 import logo from '/public/Sort.svg';
-import {SearchInput} from "@/components/shared";
 import {Button, Input} from "@/components/ui";
 import {LogIn} from "lucide-react";
 import {LoginButton} from "@/components/shared/buttons/login-button";

@@ -70,8 +70,8 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
     }
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 text-black" onClick={onClose}>
-            <div className=" p-6 rounded-xl shadow-lg shadow-black border border-black w-full bg-white opacity-100 max-w-md mx-auto z-1000" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 " onClick={onClose}>
+            <div className=" p-6 rounded-xl shadow-lg shadow-black border border-black w-full bg-white opacity-1 text-black max-w-md mx-auto text-left  z-1000" onClick={(e) => e.stopPropagation()}>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                         <h1 className={'text-2xl font-thin text-left ml-2 text-black  '}> Log in </h1>
@@ -80,7 +80,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                             name="login"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Login</FormLabel>
+                                    <FormLabel className={'ml-1'}>Login</FormLabel>
                                     <FormControl>
                                         <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
                                     </FormControl>
@@ -97,7 +97,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className={'ml-1'}>Email</FormLabel>
                                     <FormControl>
                                         <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="example@example.com" {...field} />
                                     </FormControl>
@@ -114,9 +114,9 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className={'ml-1'}>Password</FormLabel>
                                     <FormControl>
-                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
+                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="********" {...field} />
                                     </FormControl>
 
                                     <FormDescription>

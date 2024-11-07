@@ -12,7 +12,9 @@ function App() {
                     <Link to={'/pages/about-us-page'}>
                         <Button variant={'link'} className={'text-white'}>О нас</Button>
                     </Link>
-                    <Button variant={'link'} className={'text-white'}>Написать нам</Button>
+                    <Link to={'pages/sidebar-page'}>
+                        <Button variant={'link'} className={'text-white'}>side bar page test</Button>
+                    </Link>
                     <Button variant={'link'} className={'text-white'}>Товары</Button>
                     <Button variant={'link'} className={'text-white'}>Кнопка</Button>
                 </div>

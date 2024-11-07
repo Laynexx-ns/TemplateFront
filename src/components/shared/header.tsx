@@ -5,6 +5,7 @@ import {Container} from "@/components/shared";
 import {Button} from "@/components/ui/button";
 import {LoginButton} from "@/components/shared/buttons/login-button";
 import {Input} from "@/components/ui";
+import {Link} from "react-router-dom";
 
 
 interface Props{
@@ -13,27 +14,28 @@ interface Props{
 
 export const Header: React.FC<Props> = ({className}) =>{
     return (
-        <header className={cn(className, 'mt-0 pt-0 mx-20 h-25 justify-between items-center')}>
-            <Container className={'flex items-center justify-between py-8 gap-10'}>
+        <header className="flex justify-between items-center w-full px-5 gap-20 pt-5">
+            <div className="flex flex-row gap-16">
+                <Link to={'/pages/about-us-page'}>
+                    <Button variant={'link'} className={'text-white'}>О нас</Button>
+                </Link>
+                <Link to={'pages/sidebar-page'}>
+                    <Button variant={'link'} className={'text-white'}>side bar page test</Button>
+                </Link>
+                <Button variant={'link'} className={'text-white'}>Товары</Button>
+                <Button variant={'link'} className={'text-white'}>Кнопка</Button>
+            </div>
 
-                {/*логотипчик*/}
-                <div className={'flex items-center gap-4'}>
-                    <img width={164} height={208} src={'./Sort.svg'} alt={'logo'}/>
-                </div>
+            <Input className={'rounded-2xl w-[40%]'} placeholder={'   Найти...'}/>
+
+            <div className="flex flex-row gap-8">
+                <LoginButton></LoginButton>
+                <Link to={'/pages/account-page'}>
+                    <Button className={'bg-gray-400 text-black'}> Мой аккаунт </Button>
+                </Link>
+            </div>
 
 
-                {/*инпут*/}
-                <div className={' mx-auto flex-1 ml-16'}>
-                    <Input/>
-                </div>
-
-
-                {/*кнопочки*/}
-                <div className={'flex items-center gap-4'}>
-                    <LoginButton></LoginButton>
-                    <Button className={'group relative bg-white font-bold text-black'}> Sign up </Button>
-                </div>
-            </Container>
         </header>
     )
 
