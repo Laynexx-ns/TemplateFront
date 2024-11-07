@@ -1,9 +1,10 @@
 import React from 'react';
 import {cn} from "@/lib/utils";
 
-import {Container, SearchInput} from "@/components/shared";
+import {Container} from "@/components/shared";
 import {Button} from "@/components/ui/button";
 import {LoginButton} from "@/components/shared/buttons/login-button";
+import {Input} from "@/components/ui";
 
 
 interface Props{
@@ -23,7 +24,7 @@ export const Header: React.FC<Props> = ({className}) =>{
 
                 {/*инпут*/}
                 <div className={' mx-auto flex-1 ml-16'}>
-                    <SearchInput className={'mx-auto text-black w-[70%]'}/>
+                    <Input/>
                 </div>
 
 

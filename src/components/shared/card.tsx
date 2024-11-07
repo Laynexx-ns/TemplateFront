@@ -2,6 +2,7 @@ import React from 'react';
 import {Title} from "@/components/shared/title";
 import {Button} from "@/components/ui";
 import {Plus} from "lucide-react";
+import {cn} from "@/lib/utils";
 
 interface Props{
 
@@ -13,9 +14,9 @@ interface Props{
 
 export const Card: React.FC<Props> = ({className, name, imageUrl}) => {
     return (
-        <div className={className}>
+        <div className={cn(className, '') } >
 
-                <div className={'flex justify-center p-6 bg-secondary rounded-lg h-[260px]'}>
+                <div className={'flex justify-center  p-6 bg-black rounded-lg h-[260px]'}>
                     <img className={'w-[200px] h-[200px]'} src={imageUrl} alt={name}/>
                 </div>
 

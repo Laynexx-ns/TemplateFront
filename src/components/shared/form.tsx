@@ -15,15 +15,22 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {useNavigate} from 'react-router-dom';
+import {postUserRegister} from "@/client";
+import {useNavigate} from "react-router-dom";
+
+
+
 
 const formSchema = z.object({
-    username: z.string().min(3, {
+    login: z.string().min(3, {
         message: "Username must be at least 3 characters.",
     }),
     email: z.string().min(6,{
         message: "Email must be at least 6 characters.",
     }),
+    password: z.string().min(8, {
+        message: "Password must be at least 8 characters.",
+    })
 });
 
 interface ProfileFormProps {
@@ -31,22 +38,35 @@ interface ProfileFormProps {
 }
 
 export function ProfileForm({ onClose }: ProfileFormProps) {
-    // 1. Define your form.
-
-
+    const routeTo = useNavigate();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
+            login: "",
             email: "",
+            password: "",
         },
     });
 
 
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        onClose();
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        try {
+            const response = await postUserRegister({
+                body: {
+                    username: values.login,
+                    email: values.email,
+                    password: values.password
+                }
+            });
 
+            console.log('Пользователь успешно зарегистрирован:', response.data);
+            onClose();
+        } catch (error) {
+            console.error('Ошибка при регистрации:', error);
+
+        }
+        routeTo('/pages/account-page');
     }
 
     return (
@@ -57,10 +77,10 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                         <h1 className={'text-2xl font-thin text-left ml-2 text-black  '}> Log in </h1>
                         <FormField
                             control={form.control}
-                            name="username"
+                            name="login"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel>Login</FormLabel>
                                     <FormControl>
                                         <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
                                     </FormControl>
@@ -80,6 +100,23 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
                                         <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="example@example.com" {...field} />
+                                    </FormControl>
+
+                                    <FormDescription>
+                                        <FormMessage />
+                                    </FormDescription>
+
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="password"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Password</FormLabel>
+                                    <FormControl>
+                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
                                     </FormControl>
 
                                     <FormDescription>

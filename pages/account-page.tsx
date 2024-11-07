@@ -1,40 +1,47 @@
 import React from 'react';
-
-import {Button, Input} from "@/components/ui";
+import {Card, Title} from "@/components/shared";
 import {LoginButton} from "@/components/shared/buttons/login-button";
+import {Button} from "@/components/ui";
 import {Link} from "react-router-dom";
 
-function App() {
+
+
+function AboutUsPage(){
     return (
         <div className="flex flex-col min-h-screen font-raleway bg-black text-white">
+
+            {/*хэдер*/}
             <header className="flex justify-between items-center px-5 gap-30 pt-5">
-                <div className="flex flex-row gap-16">
-                    <Link to={'/pages/about-us-page'}>
-                        <Button variant={'link'} className={'text-white'}>О нас</Button>
+                <div className="flex flex-row">
+                    {/*    тут текстики и кнопочки*/}
+                    <Link to={'/'}>
+                        <Button variant={'link'} className={'text-white'}> Вернуться на главную</Button>
                     </Link>
-                    <Button variant={'link'} className={'text-white'}>Написать нам</Button>
-                    <Button variant={'link'} className={'text-white'}>Товары</Button>
-                    <Button variant={'link'} className={'text-white'}>Кнопка</Button>
+
                 </div>
 
-                <Input className={'rounded-2xl w-[40%]'}placeholder={'   Найти...'}/>
 
+                {/*ситуативно*/}
+                {/*<Input className={'rounded-2xl w-[40%]'} placeholder={'   Найти...'}/>*/}
+
+                {/*кнопочки*/}
                 <div className="flex flex-row gap-8">
                     <LoginButton></LoginButton>
-                    <Link to={'/pages/account-page'}>
-                        <Button className={'bg-gray-400 text-black'}> Мой аккаунт </Button>
-                    </Link>
+                    <Button className={'bg-gray-400 text-black'}> Sign up </Button>
                 </div>
-
 
             </header>
 
-            <main className="flex-grow flex justify-center items-center text-center">
-                <h1 className=" text-9xl hover:shadow-2xl" style={{ textShadow: '40px rgba(250, 250, 250, 0.5)' }}>
-                    TEXT
-                </h1>
+
+            {/*_______*/}
+            {/*content*/}
+            <main className="flex-grow flex justify-center text-center">
+                <Card name={'account page'} className={'mt-20 ml-20'} imageUrl={'https://avatars.githubusercontent.com/u/72513124?v=4'}/>
             </main>
 
+
+            {/*______*/}
+            {/*footer*/}
             <div className="border-b-2 border-gray-50/50 mb-5" />
             <footer className="bg-black flex justify-between gap-32 mx-auto px-5 pb-5 text-center">
                 <p className="text-[12px] text-start text-gray-100/50">copyrighted by laynexx(rofl)</p>
@@ -51,4 +58,4 @@ function App() {
     );
 }
 
-export default App;
+export default AboutUsPage;
