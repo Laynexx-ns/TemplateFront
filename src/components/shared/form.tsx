@@ -4,7 +4,6 @@ import
 { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui";
 import {
     Form,
     FormControl,
@@ -14,60 +13,112 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {postUserRegister} from "@/client";
+
 import {useNavigate} from "react-router-dom";
+import {Button, Input} from "@/components/ui";
+import {postUserRegister} from "@/client";
+import {useUser} from "@/context/UserContext";
+import {data} from "autoprefixer";
 
 
 
 
 const formSchema = z.object({
-    login: z.string().min(3, {
+    username: z.string().min(3, {
         message: "Username must be at least 3 characters.",
     }),
-    email: z.string().min(6,{
-        message: "Email must be at least 6 characters.",
-    }),
-    password: z.string().min(8, {
-        message: "Password must be at least 8 characters.",
-    })
+    email: z.string().email(),
+
+    password: z
+        .string()
+        .min(8, {
+            message: "Password must be at least 8 characters.",
+        })
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*\s).+$/, {
+            message: "Password must contain at least one uppercase letter, one lowercase letter, and one number. Mustn't contain spaces.",
+        }),
 });
+
+
+
+
 
 interface ProfileFormProps {
     onClose: () => void;
 }
 
 export function ProfileForm({ onClose }: ProfileFormProps) {
+    const { setUser } = useUser();
+
     const routeTo = useNavigate();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            login: "",
+            username: "",
             email: "",
             password: "",
         },
     });
 
+    interface Token {
+        token: string;
+        expires: string;
+    }
+
+    interface UserResponse {
+        tokens: {
+            access: Token;
+            refresh: Token;
+        };
+    }
 
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        // const routeTo = useNavigate();
+
         try {
             const response = await postUserRegister({
                 body: {
-                    username: values.login,
+                    username: values.username,
                     email: values.email,
                     password: values.password
                 }
             });
 
-            console.log('Пользователь успешно зарегистрирован:', response.data);
-            onClose();
+            if (response.data && response.data.tokens) {
+                const { tokens } = response.data;
+                if (tokens?.access !== undefined && tokens.refresh !== undefined){
+                    if (tokens.access.token && tokens.refresh.token) {
+                        setUser({
+                            access: {
+                                token: tokens.access.token,
+                                expires: tokens.access.expires
+                            },
+                            refresh: {
+                                token: tokens.refresh.token,
+                                expires: tokens.refresh.expires
+                            }
+                        });
+                        console.log("token__ " + tokens.access.token)
+                        console.log("expires at " + tokens.access.expires)
+                    } else {
+                        console.error("Токены отсутствуют в ответе сервера");
+                    }
+                }
+
+
+                console.log('Пользователь успешно зарегистрирован:', response.data);
+                onClose();
+                console.log()
+            } else {
+                throw new Error("Ответ от сервера не содержит данных или токенов.");
+            }
         } catch (error) {
             console.error('Ошибка при регистрации:', error);
-
         }
-        routeTo('/pages/account-page');
     }
+
+
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 " onClick={onClose}>
@@ -77,7 +128,7 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                         <h1 className={'text-2xl font-thin text-left ml-2 text-black  '}> Log in </h1>
                         <FormField
                             control={form.control}
-                            name="login"
+                            name="username"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className={'ml-1'}>Login</FormLabel>

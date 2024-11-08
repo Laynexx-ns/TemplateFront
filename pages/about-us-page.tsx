@@ -3,10 +3,12 @@ import {Title} from "@/components/shared";
 import {LoginButton} from "@/components/shared/buttons/login-button";
 import {Button} from "@/components/ui";
 import {Link} from "react-router-dom";
+import {useUser} from "@/context/UserContext";
 
 
 
 function AboutUsPage(){
+    const {user} = useUser();
     return (
         <div className="flex flex-col min-h-screen font-raleway bg-black text-white">
 

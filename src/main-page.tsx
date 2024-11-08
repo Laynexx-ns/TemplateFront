@@ -35,6 +35,9 @@ function App() {
                 <h1 className=" text-9xl hover:shadow-2xl" style={{ textShadow: '40px rgba(250, 250, 250, 0.5)' }}>
                     TEXT
                 </h1>
+                <Link to={'/pages/defaultpage-template'}>
+                    <Button variant={'link'} className={'text-white'}> Link to </Button>
+                </Link>
             </main>
 
             <div className="border-b-2 border-gray-50/50 mb-5" />
