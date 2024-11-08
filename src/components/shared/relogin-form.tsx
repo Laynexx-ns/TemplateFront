@@ -1,8 +1,4 @@
-"use client";
-
-import
-{ zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import React from 'react'
 import { z } from "zod";
 import {
     Form,
@@ -13,73 +9,45 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-
-import {useNavigate} from "react-router-dom";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {Button, Input} from "@/components/ui";
 import {postUserRegister} from "@/client";
 import {useUser} from "@/context/UserContext";
-import {data} from "autoprefixer";
 
-
-
+interface ReloginFormProps{
+    onClose: () => void;
+}
 
 const formSchema = z.object({
-    username: z.string().min(3, {
-        message: "Username must be at least 3 characters.",
-    }),
-    email: z.string(),
-
+    email: z.string().email(),
     password: z
         .string()
         .min(8, {
-            message: "Password must be at least 8 characters.",
+            message: "password must be at least 8 characters"
         })
         .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*\s).+$/, {
             message: "Password must contain at least one uppercase letter, one lowercase letter, and one number. Mustn't contain spaces.",
         }),
 });
 
-
-
-
-
-interface ProfileFormProps {
-    onClose: () => void;
-}
-
-export function ProfileForm({ onClose }: ProfileFormProps) {
-    const { setUser } = useUser();
-
-    const routeTo = useNavigate();
+export function ReloginForm({onClose}: ReloginFormProps){
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            username: "",
+        defaultValues:{
             email: "",
             password: "",
-        },
-    });
+        }
+    })
 
-    interface Token {
-        token: string;
-        expires: string;
-    }
-
-    interface UserResponse {
-        tokens: {
-            access: Token;
-            refresh: Token;
-        };
-    }
-
-
-    async function onSubmit(values: z.infer<typeof formSchema>) {
+    /* async function onSubmit(values: z.infer<typeof formSchema>) {
         // const routeTo = useNavigate();
+        const {user, setUser} = useUser();
+        const accessToken = user?.access?.token;
 
         try {
             const response = await postUserRegister({
                 body: {
-                    username: values.username,
                     email: values.email,
                     password: values.password
                 }
@@ -90,13 +58,10 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                 if (tokens?.access !== undefined && tokens.refresh !== undefined){
                     if (tokens.access.token && tokens.refresh.token) {
                         setUser({
-                            access: {
-                                token: tokens.access.token,
-                                expires: tokens.access.expires
-                            },
+                            access:
                             refresh: {
                                 token: tokens.refresh.token,
-                                expires: new Date(Date.now() + 10000).toISOString()
+                                expires: tokens.refresh.expires
                             }
                         });
                         console.log("token__ " + tokens.access.token)
@@ -116,45 +81,30 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
         } catch (error) {
             console.error('Ошибка при регистрации:', error);
         }
-    }
-
-
+    }*/
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 " onClick={onClose}>
-            <div className=" p-6 rounded-xl shadow-lg shadow-black border border-black w-full bg-white opacity-1 text-black max-w-md mx-auto text-left  z-1000" onClick={(e) => e.stopPropagation()}>
+            <div
+                className=" p-6 rounded-xl shadow-lg shadow-black border border-black w-full bg-white opacity-1 text-black max-w-md mx-auto text-left  z-1000"
+                onClick={(e) => e.stopPropagation()}>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+                    <form onSubmit={form.handleSubmit(() => console.log('we-we'))} className="space-y-3">
                         <h1 className={'text-2xl font-thin text-left ml-2 text-black  '}> Log in </h1>
-                        <FormField
-                            control={form.control}
-                            name="username"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className={'ml-1'}>Username</FormLabel>
-                                    <FormControl>
-                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="накалякай нейм" {...field} />
-                                    </FormControl>
 
-                                    <FormDescription>
-                                        <FormMessage />
-                                    </FormDescription>
-
-                                </FormItem>
-                            )}
-                        />
                         <FormField
                             control={form.control}
                             name="email"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel className={'ml-1'}>Email</FormLabel>
                                     <FormControl>
-                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="example@example.com" {...field} />
+                                        <Input className={'rounded-xl w-full font-light bg-gray-50'}
+                                               placeholder="example@example.com" {...field} />
                                     </FormControl>
 
                                     <FormDescription>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormDescription>
 
                                 </FormItem>
@@ -163,25 +113,26 @@ export function ProfileForm({ onClose }: ProfileFormProps) {
                         <FormField
                             control={form.control}
                             name="password"
-                            render={({ field }) => (
+                            render={({field}) => (
                                 <FormItem>
                                     <FormLabel className={'ml-1'}>Password</FormLabel>
                                     <FormControl>
-                                        <Input className={'rounded-xl w-full font-light bg-gray-50'} placeholder="********" {...field} />
+                                        <Input className={'rounded-xl w-full font-light bg-gray-50'}
+                                               placeholder="********" {...field} />
                                     </FormControl>
 
                                     <FormDescription>
-                                        <FormMessage />
+                                        <FormMessage/>
                                     </FormDescription>
 
                                 </FormItem>
                             )}
                         />
 
-                        <Button type="submit"  className={'hover:shadow-black/50 shadow-md'}>Submit</Button>
+                        <Button type="submit" className={'hover:shadow-black/50 shadow-md'}>Submit</Button>
                     </form>
                 </Form>
             </div>
         </div>
-    );
+    )
 }

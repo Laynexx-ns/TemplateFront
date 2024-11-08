@@ -14,4 +14,4 @@ export const postUserRegister = <ThrowOnError extends boolean = false>(options: 
         ...options,
         url: '/user/register'
     });
-};
+}

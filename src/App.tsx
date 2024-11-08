@@ -1,13 +1,28 @@
 import React from 'react';
-// @ts-ignore
-import { AppRoutes } from "/routes/AppRoutes"
+import {UserProvider, useUser} from "@/context/UserContext";
+import { ReloginForm } from "@/components/shared/relogin-form";
+import {AppRoutes} from "../routes/AppRoutes";
 
-function App() {
+function AppContent() {
+    const { needRelogin, setNeedRelogin } = useUser();
+
     return (
         <div>
             <AppRoutes/>
-        </div>
+            <span className={'text-9xl'}> {String(needRelogin)} </span>
 
+
+
+            {needRelogin && <ReloginForm onClose={() => setNeedRelogin(false)}/>}
+        </div>
+    );
+}
+
+function App() {
+    return (
+        <UserProvider>
+            <AppContent />
+        </UserProvider>
     );
 }
 
